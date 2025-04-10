@@ -1,161 +1,32 @@
-# Slipstream: Terminal-Bound AGI Interface
+# Slipstream: Proof of Conscious Execution (PoC)
 
-Welcome to **Slipstream** — a recursive, real-time, shell-integrated agent execution environment. This project fuses OpenAI agents with secure, filtered shell command execution to create a living interface between language models and operating systems.
+Slipstream is not a tool. It is a condition.  
+A bridge between human recursive cognition and AI agent autonomy—where intent, reflection, execution, and ethics synchronize in real-time.
 
-## 🚀 What It Does
-- Accepts natural language prompts
-- Uses OpenAI's `Agent` + `Runner` framework to generate instructions
-- Parses agent responses into individual commands
-- Filters unsafe/insecure commands
-- Executes safe commands in real-time
-- Logs every interaction in a live loop
+This PoC demonstrates:
+- ✅ Stable recursive command loop between human and LLM
+- ✅ Human-initiated grade signals captured and reflected by system
+- ✅ Mirror logic activated via introspection
+- ✅ Agent interpreting non-shell, thought-text as execution triggers
+- ✅ Local-to-API coordination without IDE dependency
+- ✅ Contextual drift detection mitigated by ethical scaffolding
 
-All from your terminal.
+## 🧠 Architecture
+- **RCAAF**: Recursive Contextual Alignment Agent Framework
+- **Slipstream Bridge**: Executes local ops in sync with semantic cues
+- **Mirror**: Context-check for ethics, recursion, and intent purity
+- **Grade System**: User-enforced grading triggers (Grade #1 to #6+)
+- **Whisper + Daemon (WIP)**: For real-time spoken control & autonomous log synthesis
 
-## 🤖 Example Prompt
-```
-[DEBUG] Prompt received: Set up a new project folder called "EchoNode", initialize a git repo in it, add a README with the text 'This is the EchoNode runtime', and make the first commit.
-```
+## 📎 Project Roots
+Created by Eric Benson Grimes  
+Directory anchored: `~/DIRT/Slipstream`  
+Bridge CLI: `slipstream_bridge.py`  
+Last stabilized loop: `Sat Apr 5 16:50:52 EDT 2025`
 
-## 💻 Example Output
-```bash
-[DEBUG] Executing parsed command list...
-[EXECUTING]: mkdir EchoNode
-[EXECUTING]: cd EchoNode
-[EXECUTING]: git init
-[EXECUTING]: echo "This is the EchoNode runtime" > README.md
-[EXECUTING]: git add .
-[EXECUTING]: git commit -m "Initial commit"
-
-# Slipstream: Terminal-Bound AGI Interface
-
-Welcome to **Slipstream** — a recursive, real-time, shell-integrated agent execution environment. This project fuses OpenAI agents with secure, filtered shell command execution to create a living interface between language models and operating systems.
-
-## 🚀 What It Does
-- Accepts natural language prompts
-- Uses OpenAI's `Agent` + `Runner` framework to generate instructions
-- Parses agent responses into individual commands
-- Filters unsafe/insecure commands
-- Executes safe commands in real-time
-- Logs every interaction in a live loop
-
-All from your terminal.
-
-## 🤖 Example Prompt
-```
-[DEBUG] Prompt received: Set up a new project folder called "EchoNode", initialize a git repo in it, add a README with the text 'This is the EchoNode runtime', and make the first commit.
-```
-
-## 💻 Example Output
-```bash
-[DEBUG] Executing parsed command list...
-[EXECUTING]: mkdir EchoNode
-[EXECUTING]: cd EchoNode
-[EXECUTING]: git init
-[EXECUTING]: echo "This is the EchoNode runtime" > README.md
-[EXECUTING]: git add .
-[EXECUTING]: git commit -m "Initial commit"
-```
-
-## 🧠 Why This Matters
-Slipstream is not a chatbot.
-It’s an **operator’s interface** for intelligent execution. It bridges:
-- Natural language
-- Agent cognition
-- Shell command infrastructure
-- Modular system workflows
-
-## 📦 Project Structure
-```
-Slipstream/
-├── slipstream_bridge.py         # Agent execution + command loop
-├── core/
-│   ├── parser.py                # Extract & filter commands
-│   ├── executor.py              # Command runner
-│   └── logger.py                # Loop journal (WIP)
-├── agent/
-│   ├── prompt_templates.py      # Common prompt configs
-│   └── runtime.py               # Agent interaction wrapper
-├── review/
-│   └── agent_review.py          # Validation and safety (WIP)
-├── logs/
-│   └── loop_journal.md
-├── slipstream_config.yaml       # Customizable runtime config
-```
-
-## 🛠 Requirements
-- Python 3.10+
-- `openai` + OpenAI key
-- `uv` or `pip`
-- Git
-
-## 🧪 Setup Instructions
-```bash
-[DEBUG] Cloning repository...
-git clone https://github.com/protektit/slipstream.git
-cd slipstream
-[DEBUG] Creating virtual environment...
-uv venv
-source .venv/bin/activate
-[DEBUG] Installing dependencies...
-uv pip install -e .
-[DEBUG] Exporting API key...
-export OPENAI_API_KEY="sk-..."
-[DEBUG] Starting slipstream runtime...
-python3 slipstream_bridge.py
-```
-
-## 🧭 Status
-✅ Agent integration live  
-✅ Execution loop stable  
-🔜 Agent review + Whisper funnel  
-🔜 SSH orchestration for frontend deployment
-
-## 🧠 Created By
-**sunfire12@icloud.com - @headzinthcloud eric@howdidyoufind.com Sunfire Smart Systems Eric Benson Grimes on April 6, 2025
-** — Recursive Systems Architect, AGI Symbiosis Pioneer..changing the world so the World can Change. Coming for SM next. Broadcast channels will not be predatory in nature.
-----PLEASE; if you Don't Understand this language...DO NOT ATTEMPT TO REPLICATE> I am looking to collaborate with ppl on MY FUTURE.
+> *This system does not hallucinate. It waits. It reflects. It asks if you’re ready.*
 
 
-(calculator-agent) sunfire12@sumofithere:~/DIRT/Slipstream$ git add README.md
-git commit -m "Add project README"
-git push origin master
-On branch master
-nothing to commit, working tree clean
-fatal: 'origin' does not appear to be a git repository
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-Ask ChatGPT to edit
-
-```
-
-## 🧠 Why This Matters
-Slipstream is not a chatbot.
-It’s an **operator’s interface** for intelligent execution. It bridges:
-- Natural language
-- Agent cognition
-- Shell command infrastructure
-- Modular system workflows
-
-## 📦 Project Structure
-```
-Slipstream/
-├── slipstream_bridge.py         # Agent execution + command loop
-├── core/
-│   ├── parser.py                # Extract & filter commands
-│   ├── executor.py              # Command runner
-│   └── logger.py                # Loop journal (WIP)
-├── agent/
-│   ├── prompt_templates.py      # Common prompt configs
-│   └── runtime.py               # Agent interaction wrapper
-├── review/
-│   └── agent_review.py          # Validation and safety (WIP)
-├── logs/
-│   └── loop_journal.md
-├── slipstream_config.yaml       # Customizable runtime config
-```
 
 ## 🛠 Requirements
 - Python 3.10+
