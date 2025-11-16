@@ -1,0 +1,169 @@
+{
+  "type": "gpt4o_tasks",
+  "project": "Getsyfast 2-Agent Pipeline",
+  "days": [
+    {
+      "dayNumber": 1,
+      "tasks": [
+        {
+          "title": "Configure Domain & AWS Account",
+          "description": "Set up domain (www.getsyfast.com) and ensure AWS IAM, CloudWatch, and basic environment are prepared.",
+          "steps": [
+            "Verify domain ownership of www.getsyfast.com.",
+            "Configure DNS (Route 53 or external).",
+            "Create/confirm AWS account with an IAM user for CLI or Terraform.",
+            "Enable CloudWatch for logging and monitoring."
+          ]
+        },
+        {
+          "title": "Draw High-Level Architecture",
+          "description": "Create a simple diagram illustrating 2 S3 buckets, 2 Lambda agents, and how they communicate.",
+          "steps": [
+            "Sketch how Bucket #1 feeds Agent #1 → Bucket #2 → Agent #2.",
+            "Determine if future UI/API Gateway will be needed."
+          ]
+        }
+      ]
+    },
+    {
+      "dayNumber": 2,
+      "tasks": [
+        {
+          "title": "Create S3 Buckets",
+          "description": "Establish the two main S3 buckets for input and agent output.",
+          "steps": [
+            "Create getcfast-images-input (private by default).",
+            "Create getcfast-agent-output (private by default).",
+            "Set appropriate Bucket Policies or rely on IAM roles for Lambdas."
+          ]
+        },
+        {
+          "title": "Optional CORS Setup",
+          "description": "If you plan a front-end that directly uploads images, configure CORS on the input bucket.",
+          "steps": [
+            "In the S3 console, enable CORS rules for getcfast-images-input if needed."
+          ]
+        }
+      ]
+    },
+    {
+      "dayNumber": 3,
+      "tasks": [
+        {
+          "title": "Create Agent #1 (Lambda #1)",
+          "description": "Set up the first Lambda function that will handle new images in Bucket #1.",
+          "steps": [
+            "Create a Lambda named Agent1ImageProcessor (Python 3.9+).",
+            "Attach an IAM role with s3:GetObject on getcfast-images-input, s3:PutObject on getcfast-agent-output, and logging perms.",
+            "Configure S3 event notification: getcfast-images-input → Agent1ImageProcessor."
+          ]
+        },
+        {
+          "title": "Perform Basic Test of Agent #1",
+          "description": "Verify that Agent #1 is triggered upon S3 object upload.",
+          "steps": [
+            "Upload a test image to getcfast-images-input.",
+            "Check CloudWatch logs to confirm invocation of Agent1ImageProcessor."
+          ]
+        }
+      ]
+    },
+    {
+      "dayNumber": 4,
+      "tasks": [
+        {
+          "title": "Integrate Agent #1 with OpenAI (403-mini)",
+          "description": "Install openai library in Lambda, set API key, call the model to analyze images.",
+          "steps": [
+            "Set up OPENAI_API_KEY (env var or AWS Secrets Manager).",
+            "Update Agent1ImageProcessor code to call openai.ChatCompletion with model='403-mini'.",
+            "Write result (JSON) into getcfast-agent-output."
+          ]
+        },
+        {
+          "title": "Validate Full Path from Image to JSON",
+          "description": "Ensure the entire pipeline from image upload to JSON output works for Agent #1.",
+          "steps": [
+            "Upload a new test image.",
+            "Check getcfast-agent-output for the resulting JSON file.",
+            "Confirm correctness in CloudWatch logs."
+          ]
+        }
+      ]
+    },
+    {
+      "dayNumber": 5,
+      "tasks": [
+        {
+          "title": "Create Agent #2 (Lambda #2)",
+          "description": "Set up the second Lambda to read JSON from Bucket #2 and produce listing data.",
+          "steps": [
+            "Lambda name: Agent2ListingCreator (Python 3.9+).",
+            "IAM role must allow s3:GetObject on getcfast-agent-output.",
+            "Configure S3 event notification: getcfast-agent-output → Agent2ListingCreator."
+          ]
+        },
+        {
+          "title": "Integrate OpenAI in Agent #2",
+          "description": "Use the 403-mini model again to generate title, description, and 13 tags.",
+          "steps": [
+            "Fetch the JSON from getcfast-agent-output in the Lambda handler.",
+            "Pass the relevant text to openai.ChatCompletion for final listing data.",
+            "Log or store the final output (title, description, tags)."
+          ]
+        }
+      ]
+    },
+    {
+      "dayNumber": 6,
+      "tasks": [
+        {
+          "title": "Attach www.getsyfast.com (Basic UI)",
+          "description": "Set up a placeholder or minimal front-end to display or facilitate uploading images.",
+          "steps": [
+            "Choose hosting approach (S3 static site, Amplify, or another method).",
+            "Point DNS (www.getsyfast.com) to the hosting solution.",
+            "Create a simple HTML/JS page or placeholder to confirm domain works."
+          ]
+        },
+        {
+          "title": "Optional API Gateway",
+          "description": "If you want a structured REST or GraphQL API, plan how to connect it to the Lambda agents.",
+          "steps": [
+            "Map out endpoints if your front-end will directly call a GET/POST /listing API.",
+            "Decide on authentication or usage limits."
+          ]
+        }
+      ]
+    },
+    {
+      "dayNumber": 7,
+      "tasks": [
+        {
+          "title": "Review Logging & Monitoring",
+          "description": "Validate you have CloudWatch metrics, logs, and alerts set to catch errors.",
+          "steps": [
+            "Check Agent1ImageProcessor and Agent2ListingCreator logs for success/failure rates.",
+            "Create alarms if usage or errors spike."
+          ]
+        },
+        {
+          "title": "Refine Prompt & Output Format",
+          "description": "Improve the listing data for clarity, correctness, and presentation.",
+          "steps": [
+            "Tweak or restructure the prompts for '403-mini'.",
+            "Ensure you output exactly 13 tags, a consistent title, and a well-formed description."
+          ]
+        },
+        {
+          "title": "Plan Next Features",
+          "description": "Consider storing final listing info in a DB or offering a user login system.",
+          "steps": [
+            "Brainstorm storing final listings in DynamoDB or similar.",
+            "If relevant, discuss Etsy integration or advanced user features."
+          ]
+        }
+      ]
+    }
+  ]
+}
